@@ -12,7 +12,12 @@
     "comma-dangle": "off",
     "indent": "off",
     "spaced-comment": "off",
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "operator-linebreak": "off",
+    "no-debugger": "off",
+    "no-trailing-spaces": "off",
+    "no-unused-vars": "off",
+    "max-len": "off"
   },
   "extends": [
     "eslint:recommended",
