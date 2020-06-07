@@ -5,12 +5,24 @@ export class ExelComponent extends DOMListener {
         super($root, options.listeners);
         this.name = options.name || '';
         this.emitter = options.emitter
+        this.store = options.store
+        this.subscribe = options.subscribe || []
         this.prepare();
-        this.unsubscribers = []
+        this.unsubscribers = [];
     }
     // Настройка компонента до init
     prepare() {
 
+    }
+
+    $dispatch(action) {
+        this.store.dispatch(action)
+    }
+    $getState() {
+       return this.store.getState()
+    }
+    isWatching(key) {
+        return this.subscribe.includes(key)
     }
 
     //Уведомляем слушателей про событие event
@@ -22,6 +34,8 @@ export class ExelComponent extends DOMListener {
         const unsub = this.emitter.subscribe(event, fn);
         this.unsubscribers.push(unsub);
     }
+    // Сюда приходят изменения только по тем полям, на которые мы подписались
+    storeChanged() {}
 
     // возвращаем шаблон компонента
     toHTML() {
@@ -34,6 +48,6 @@ export class ExelComponent extends DOMListener {
     }
     destroy() {
         this.removeDOMListeners();
-        this.unsubscribers.forEach(unsub => unsub())
+        this.unsubscribers.forEach(unsub => unsub());
     }
 }
