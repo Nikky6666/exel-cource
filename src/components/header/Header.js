@@ -32,6 +32,7 @@ export class Header extends ExelComponent {
     }
 
     onInput(e) {
+        console.log('')
         const $target = $(e.target);
         this.$dispatch(actions.changeTitle($target.text()))
     }
