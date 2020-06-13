@@ -28,11 +28,13 @@ function withWidthFrom(state = {}) {
     }
 }
 function toCell(row, state) {
+  //  console.log(state)
     return function(_, col) {
         const id = `${row}:${col}`;
+        const stylesState = state.stylesState ? state.stylesState[id] : {}
         const styles = toInlineStyles({
             ...defaultCellsStyles,
-            ...state.stylesState[id]
+            ...stylesState
         })
         const data = getCellContent(state.dataState, id);
         return `<div 
