@@ -1,4 +1,4 @@
-import {storage} from '@core/utils';
+import {clone} from '@core/utils';
 import {defaultCellsStyles, defaultTableTitle} from '@/constants';
 
 const defaultState = {
@@ -8,18 +8,20 @@ const defaultState = {
     stylesState: {},
     currentText: '',
     tableTitle: defaultTableTitle,
-    currentCellStyles: defaultCellsStyles
+    currentCellStyles: defaultCellsStyles,
+    openedDate: new Date().toJSON()
 }
-const nomalize = state => {
+const normalize = state => {
     const newSate = {
         ...state,
         currentCellStyles: defaultCellsStyles,
         currentText: '',
     }
     if (!state.tableTitle) {
-        newSate.tableTitle = ''
+        newSate.tableTitle = defaultTableTitle
     }
     return newSate
 }
-const storageSate = storage('excel-state');
-export const initialState = storageSate ? nomalize(storageSate) : defaultState
+export function normalizeInitialState(state) {
+    return state ? normalize(state) : clone(defaultState)
+}
