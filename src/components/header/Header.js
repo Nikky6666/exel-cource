@@ -32,6 +32,7 @@ export class Header extends ExelComponent {
             </div>`;
     }
 
+
     onInput(e) {
         console.log('')
         const $target = $(e.target);

@@ -30,6 +30,7 @@ export class Router {
     }
 
     destroy() {
+        console.log('destroy')
         window.removeEventListener('hashchange', this.changePageHandler)
     }
 }
